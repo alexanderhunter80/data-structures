@@ -1,0 +1,22 @@
+Notes Doc
+
+Purpose
+This doc is for leaving notes and writing ideas down and explaining if necessary
+what changes you made since it's probably less intrusive and more convienent then
+using a messaging program to write out explanations and reasoning here.
+
+CL - 7.21.18 - 9am
+I added to the list a few other data structures and claimed a few. I thought it
+would be cool if we implemented some of the basic ones in different ways too since
+it may be a challenge. Also I was thinking in the spirit of competition but not actually
+competition and also in the spirit of creating new data structures, it would be cool
+to create Challenges or Scenarios where we both could design an algorithm to solve
+a problem. For example, a Scenario could be, you are programming a mars rover,
+the rover collects data about rocks, like size, color, so on, you need to record
+the data and send only the most important or interesting observations you find,
+aka don't send two thousand entries of the same rock. Something like that. That may
+have not been the best example but I think you get the idea. Nevertheless, in terms
+of claiming data structures, I think we should claim them to get all of them implemented
+first but after that if we want to reimplement any of them than that's fine we can just
+either package it or namespace it or whichever mechanism you can do that in Java.
+Anyways, I think that's all I have to say for now.

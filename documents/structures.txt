@@ -1,0 +1,41 @@
+Controls:
+- Array			<< AH, mostly done
+- SLL 			<< AH, mostly done
+
+Arrays:
+- Circular Array
+
+Lists:
+- Doubly Linked List
+- Sentinel Cyclical Doubly Linked List (CL)
+- Linked List stored as an Array
+
+Hashtables:
+- Chained (CL)
+- Open addressing
+
+Hash Functions?
+
+Trees:
+- Simple binary search tree
+- Red-black tree (CL)
+- van Emde Boas tree (CL)
+- Splay tree
+
+Heaps:
+- Simple min heap
+- Binomial heap
+- Pairing heap
+- Fib Heap (CL)
+
+Graphs:
+- Simple Graph?
+
+Tries:
+- Simple trie (radix tree)
+- X-fast trie
+
+Challenges
+- Minimal Swaps
+- Fast as Possible (Infinite Memory)
+
