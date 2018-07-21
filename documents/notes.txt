@@ -20,3 +20,7 @@ of claiming data structures, I think we should claim them to get all of them imp
 first but after that if we want to reimplement any of them than that's fine we can just
 either package it or namespace it or whichever mechanism you can do that in Java.
 Anyways, I think that's all I have to say for now.
+
+AH - 7.21.18 - 9:50am
+
+Neat idea for the challenges, probably best to wait until after we implement everything and then see if we can figure out use cases for crazy things in these challenges we set for ourselves.   Some overlap is probably good too - I definitely want to take a shot at a red-black tree, apparently they're very common in actual usage.  But I agree, let's get through the list first and go from there
