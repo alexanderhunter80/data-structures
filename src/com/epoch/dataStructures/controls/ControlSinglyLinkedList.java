@@ -1,6 +1,8 @@
 package com.epoch.dataStructures.controls;
 
-public class ControlSinglyLinkedList {
+import com.epoch.dataStructures.Testable;
+
+public class ControlSinglyLinkedList implements Testable {
 
 	// attributes
 
@@ -20,7 +22,7 @@ public class ControlSinglyLinkedList {
 		return head;
 	}
 
-	public int getSize() {
+	public int size() {
 		return size;
 	}
 

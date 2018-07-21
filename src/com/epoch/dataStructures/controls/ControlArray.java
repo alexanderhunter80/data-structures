@@ -1,6 +1,8 @@
 package com.epoch.dataStructures.controls;
 
-public class ControlArray {
+import com.epoch.dataStructures.Testable;
+
+public class ControlArray implements Testable {
 	
 	// attributes
 	

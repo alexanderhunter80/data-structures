@@ -12,7 +12,7 @@ Lists:
 
 Hashtables:
 - Chained (CL)
-- Open addressing
+- Open addressing	<< AH
 
 Hash Functions?
 
@@ -20,7 +20,7 @@ Trees:
 - Simple binary search tree
 - Red-black tree (CL)
 - van Emde Boas tree (CL)
-- Splay tree
+- Splay tree		<< AH
 
 Heaps:
 - Simple min heap

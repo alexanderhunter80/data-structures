@@ -1,10 +1,22 @@
 package com.epoch.dataStructures;
 
+/*
+ * @author Alexander Hunter
+ * @version 1.0
+ * 
+ * Partly adapted from Vladimir Roubtsov's sizeOf() published in JavaWorld, Aug 2002
+ */
+
 public class Benchmarker {
+	
+	private static final Runtime _runtime = Runtime.getRuntime();
 	
 	private long startTime;
 	private long stopTime;
 	private long elapsedTime;
+	
+	private long heap1;
+	private long heap2;
 	
 	public Benchmarker() {}
 	
@@ -21,5 +33,46 @@ public class Benchmarker {
 		System.out.println("ns");
 		return elapsedTime;
 	}
+	
+	public void initSize() throws Exception {
+		runGC();
+		heap1 = usedMemory();	
+	}
+	
+	public int calculateSize() throws Exception {
+		runGC();
+		heap2 = usedMemory();
+		int size = (int) heap2 - (int) heap1;
+		System.out.println("heap before: " + Long.toString(heap1) + " , heap after: " + Long.toString(heap2));
+		System.out.println("heap delta: " + Integer.toString(size) + "bytes");
+		return size;
+	}
+	
+	
+	
+	private static void runGC() throws Exception {
+		for(int i = 0; i < 4; i++) {
+			_runGC();
+		}
+	}
+	
+	private static void _runGC() throws Exception{
+		long uM1 = usedMemory();
+		long uM2 = Long.MAX_VALUE;
+		for(int i = 0; ((uM1 < uM2)&&(i < 100)); i++) {
+			_runtime.runFinalization();
+			_runtime.gc();
+			Thread.currentThread().yield();
+			
+			uM2 = uM1;
+			uM1 = usedMemory();
+		}
+	}
+	
+	private static long usedMemory() {
+		return _runtime.totalMemory() - _runtime.freeMemory();
+	}
+	
+	
 
 }
