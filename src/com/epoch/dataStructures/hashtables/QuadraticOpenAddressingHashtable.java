@@ -111,8 +111,13 @@ public class QuadraticOpenAddressingHashtable {
 			if(table[at] == null) {
 				return null;
 			}
+			// test for "deleted" node's null key to avoid NullPointerException
+			if(table[at].key == null) {
+				// no-op
+				assert true;
+			}
 			// if node is not null, compare keys for equality
-			if(table[at].key.equals(k)) {
+			else if(table[at].key.equals(k)) {
 				return table[at].value;
 			}
 			// otherwise, step ahead
@@ -136,8 +141,13 @@ public class QuadraticOpenAddressingHashtable {
 			if(table[at] == null) {
 				return false;
 			}
+			// test for "deleted" node's null key to avoid NullPointerException
+			if(table[at].key == null) {
+				// no-op
+				assert true;
+			}
 			// if node is not null, compare keys for equality
-			if(table[at].key.equals(k)) {
+			else if(table[at].key.equals(k)) {
 				return true;
 			}
 			// otherwise, step ahead

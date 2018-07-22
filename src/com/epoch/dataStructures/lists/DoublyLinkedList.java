@@ -39,6 +39,7 @@ public class DoublyLinkedList {
 			tail = head;
 		} else {
 			tail.setNext(new DLNode(o));
+			tail.getNext().setPrev(tail);
 			tail = tail.getNext();
 		}
 		size++;
@@ -101,11 +102,21 @@ public class DoublyLinkedList {
 			throw new IndexOutOfBoundsException();
 		}
 		DLNode current;
+		if(size == 1) {
+			head = null;
+			tail = null;
+			size--;
+			return;
+		}
 		if(idx == 0) {
 			head = head.getNext();
+			head.setPrev(null);
+			size--;
 			return;
-		} else if(idx == size) {
+		} else if(idx == size-1) {
 			tail = tail.getPrev();
+			tail.setNext(null);
+			size--;
 			return;
 		} else if(idx < size/2) {
 			// target in first half of list, traverse from head
@@ -122,6 +133,7 @@ public class DoublyLinkedList {
 		}
 		current.getPrev().setNext(current.getNext());
 		current.getNext().setPrev(current.getPrev());
+		size--;
 		return;
 	}
 
