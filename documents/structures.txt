@@ -6,14 +6,14 @@ Arrays:
 - Circular Array
 
 Lists:
-- Doubly Linked List
+- Doubly Linked List	<< AH, mostly done
 - Sentinel Cyclical Doubly Linked List (CL)
 - Linked List stored as an Array
 - Skip List
 
 Hashtables:
 - Chained (CL)
-- Open addressing	<< AH
+- Open addressing	<< AH, mostly done
 
 Hash Functions?
 
