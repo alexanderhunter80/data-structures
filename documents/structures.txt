@@ -9,6 +9,7 @@ Lists:
 - Doubly Linked List
 - Sentinel Cyclical Doubly Linked List (CL)
 - Linked List stored as an Array
+- Skip List
 
 Hashtables:
 - Chained (CL)

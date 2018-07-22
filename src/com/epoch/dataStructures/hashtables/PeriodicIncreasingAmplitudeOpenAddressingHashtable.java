@@ -1,7 +1,7 @@
 package com.epoch.dataStructures.hashtables;
 
-public class QuadraticOpenAddressingHashtable {
-
+public class PeriodicIncreasingAmplitudeOpenAddressingHashtable {
+	
 	private int size;
 	private OAHashNode[] table;
 	private OAHashNode deleted;
@@ -10,7 +10,7 @@ public class QuadraticOpenAddressingHashtable {
 	
 	private int step;
 
-	public QuadraticOpenAddressingHashtable(int size, double threshold) {
+	public PeriodicIncreasingAmplitudeOpenAddressingHashtable(int size, double threshold) {
 		this.size = size;
 		table = new OAHashNode[size];
 		load = 0;
@@ -49,7 +49,7 @@ public class QuadraticOpenAddressingHashtable {
 		// initialize step as 1
 		step = 1;
 		// step through table starting at hash, inserting if either a null node or a dummy node is found
-		while(at<size) {
+		while(at<size && at >= 0) {
 			if(table[at]==null) {
 				table[at] = new OAHashNode(k,v);
 				return;
@@ -57,9 +57,9 @@ public class QuadraticOpenAddressingHashtable {
 				table[at] = new OAHashNode(k,v);
 				return;
 			} else {
-				// quadratic probing: step forward, then double step to prepare for next iteration
+				// periodic probing: step forward, then flip step's sign and increase by 2
 				at += step;
-				step *= 2;
+				step = 0 - (step+2);
 			}
 		}
 		// if we have gotten here, then we are past the end of the table and have failed to add the value, necessitating a resize() call
@@ -74,7 +74,7 @@ public class QuadraticOpenAddressingHashtable {
 		// initialize step as 1
 		step = 1;
 		// begin probing at hash
-		while(at<size) {
+		while(at<size && at >= 0) {
 			// fail if any probed node is null
 			if(table[at] == null) {
 				return;
@@ -91,9 +91,9 @@ public class QuadraticOpenAddressingHashtable {
 				return;
 			}
 			// otherwise, step ahead
-			// quadratic probing: step forward, then double step to prepare for next iteration
+			// periodic probing: step forward, then flip step's sign and increase by 2
 			at += step;
-			step *= 2;
+			step = 0 - (step+2);
 		}
 		// if we have gotten here, then we are past the end of the table and the key is not present
 		System.out.println("Hit end of table!");
@@ -106,7 +106,7 @@ public class QuadraticOpenAddressingHashtable {
 		// initialize step as 1
 		step = 1;
 		// begin probing at hash
-		while(at<size) {
+		while(at<size && at >= 0) {
 			// fail if any probed node is null
 			if(table[at] == null) {
 				return null;
@@ -116,9 +116,9 @@ public class QuadraticOpenAddressingHashtable {
 				return table[at].value;
 			}
 			// otherwise, step ahead
-			// quadratic probing: step forward, then double step to prepare for next iteration
+			// periodic probing: step forward, then flip step's sign and increase by 2
 			at += step;
-			step *= 2;
+			step = 0 - (step+2);
 		}
 		// if we have gotten here, then we are past the end of the table and the key is not present
 		System.out.println("Hit end of table!");
@@ -131,7 +131,7 @@ public class QuadraticOpenAddressingHashtable {
 		// initialize step as 1
 		step = 1;
 		// begin probing at hash
-		while(at<size) {
+		while(at<size && at >= 0) {
 			// fail if any probed node is null
 			if(table[at] == null) {
 				return false;
@@ -141,9 +141,9 @@ public class QuadraticOpenAddressingHashtable {
 				return true;
 			}
 			// otherwise, step ahead
-			// quadratic probing: step forward, then double step to prepare for next iteration
+			// periodic probing: step forward, then flip step's sign and increase by 2
 			at += step;
-			step *= 2;
+			step = 0 - (step+2);
 		}
 		// if we have gotten here, then we are past the end of the table and the key is not present
 //		System.out.println("Hit end of table!");
@@ -152,7 +152,7 @@ public class QuadraticOpenAddressingHashtable {
 
 	private void resize(){
 		// resize should callout when it is called, just to see how often it happens
-		System.out.println("QuadraticOpenAddressingHashtable is resizing from "+size+" to "+(size*2));
+		System.out.println("PeriodicIncreasingAmplitudeOpenAddressingHashtable is resizing from "+size+" to "+(size*2));
 
 		size *= 2;
 		OAHashNode[] oldTable = table;

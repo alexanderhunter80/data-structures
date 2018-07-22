@@ -30,20 +30,22 @@ public class DataStructuresDriver {
 		// .start() and .stop() create an additional process and some variables that may also distort the size estimation,
 		// although this is probably much less impactful than the other way around
 		
-		ArrayList<String> oneThousandStrings = new ArrayList();
+		ArrayList<String> testStrings = new ArrayList<String>();
 		RandomStringGenerator randS = new RandomStringGenerator();
 		Random rand = new Random();
 		
+		int passes = 10000;
+		int stringLength = 5;
 		
 		// setup, creates an ArrayList of one thousand random strings and an Array of one thousand ints 0-999
 		
-		int[] oneThousandInts = new int[1000];
-		for(int i = 0; i < 1000; i++) {
-			oneThousandInts[i] = i;
-			oneThousandStrings.add(randS.generate(3));
+		int[] testInts = new int[passes];
+		for(int i = 0; i < passes; i++) {
+			testInts[i] = i;
+			testStrings.add(randS.generate(stringLength));
 		}
 		
-		System.out.println("oneThousandStrings generated");
+		System.out.println("tenThousandStrings generated");
 		System.out.println();
 		
 		
@@ -57,16 +59,16 @@ public class DataStructuresDriver {
 		
 		benchmark.start();
 		
-		ControlArray array = new ControlArray(1000);
-		for(String s : oneThousandStrings) {
+		ControlArray array = new ControlArray(passes);
+		for(String s : testStrings) {
 			array.add(s);
 		}
 		
 		benchmark.stop("ControlArray: .add()");
 		System.out.println("Size: "+ array.size());
-		System.out.println("Last element: " + array.get(999));
+		System.out.println("Last element: " + array.get(passes-1));
 		try {
-			System.out.println(array.get(1000));
+			System.out.println(array.get(passes));
 		} catch(ArrayIndexOutOfBoundsException e) {
 			System.out.println("Hit expected exception:");
 			System.out.println(e);
@@ -78,8 +80,8 @@ public class DataStructuresDriver {
 		try {
 			benchmark.initSize();
 			
-			ControlArray array2 = new ControlArray(1000);
-			for(String s : oneThousandStrings) {
+			ControlArray array2 = new ControlArray(passes);
+			for(String s : testStrings) {
 				array2.add(s);
 			}
 			
@@ -95,12 +97,12 @@ public class DataStructuresDriver {
 		
 		benchmark.start();
 		
-		for(int i : oneThousandInts) {
+		for(int i : testInts) {
 			array.get(i);
 		}
 		
 		benchmark.stop("ControlArray: .get()");
-		System.out.println("One random get: "+array.get(rand.nextInt(1000)));
+		System.out.println("One random get: "+array.get(rand.nextInt(passes)));
 		System.out.println();
 		
 		// testing time for .contains()
@@ -109,8 +111,8 @@ public class DataStructuresDriver {
 		
 		int countFound = 0;
 		int countMissed = 0;
-		for(int i = 0; i < 1000; i++) {
-			String s = randS.generate(3);
+		for(int i = 0; i < passes; i++) {
+			String s = randS.generate(stringLength);
 			boolean tf = array.contains(s);
 			if(tf == true) {
 				countFound++;
@@ -130,7 +132,7 @@ public class DataStructuresDriver {
 		
 		benchmark.start();
 		
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < passes; i++) {
 			int r = rand.nextInt(array.size());
 			array.remove(r);
 		}
@@ -158,15 +160,15 @@ public class DataStructuresDriver {
 		benchmark.start();
 		
 		ControlSinglyLinkedList list = new ControlSinglyLinkedList();
-		for(String s : oneThousandStrings) {
+		for(String s : testStrings) {
 			list.add(s);
 		}
 		
 		benchmark.stop("ControlArray: .add()");
 //		System.out.println(list.size());
-//		System.out.println(list.get(999));
+//		System.out.println(list.get(passes-1));
 //		try {
-//			System.out.println(list.get(1000));
+//			System.out.println(list.get(passes));
 //		} catch(IndexOutOfBoundsException e) {
 //			System.out.println("Hit expected exception:");
 //			System.out.println(e);
@@ -179,7 +181,7 @@ public class DataStructuresDriver {
 			benchmark.initSize();
 			
 			ControlSinglyLinkedList list2 = new ControlSinglyLinkedList();
-			for(String s : oneThousandStrings) {
+			for(String s : testStrings) {
 				list2.add(s);
 			}
 			
@@ -195,7 +197,7 @@ public class DataStructuresDriver {
 		
 		benchmark.start();
 		
-		for(int i : oneThousandInts) {
+		for(int i : testInts) {
 			list.get(i);
 		}
 		
@@ -208,8 +210,8 @@ public class DataStructuresDriver {
 		
 		countFound = 0;
 		countMissed = 0;
-		for(int i = 0; i < 1000; i++) {
-			String s = randS.generate(3);
+		for(int i = 0; i < passes; i++) {
+			String s = randS.generate(stringLength);
 			boolean tf = list.contains(s);
 			if(tf == true) {
 				countFound++;
@@ -229,7 +231,7 @@ public class DataStructuresDriver {
 		
 		benchmark.start();
 		
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < passes; i++) {
 			int r = rand.nextInt(list.size());
 			list.remove(r);
 		}
@@ -248,17 +250,17 @@ public class DataStructuresDriver {
 		
 		
 		// setting up vanilla array from oneThousandStrings, for minimum overhead
-		String[] strings = new String[1000];
-		for(int i = 0; i < 1000; i++) {
-			strings[i] = oneThousandStrings.get(i);
+		String[] strings = new String[passes];
+		for(int i = 0; i < passes; i++) {
+			strings[i] = testStrings.get(i);
 		}
 		
 		// testing time for .add()
 		
 		benchmark.start();
 		
-		LinearOpenAddressingHashtable linearTable = new LinearOpenAddressingHashtable(1000, 0.25);
-		for(int i=0; i < 1000; i++) {
+		LinearOpenAddressingHashtable linearTable = new LinearOpenAddressingHashtable(1000000, 0.25);
+		for(int i=0; i < passes; i++) {
 			linearTable.add(strings[i], i);
 		}
 		
@@ -278,7 +280,7 @@ public class DataStructuresDriver {
 			benchmark.initSize();
 			
 			LinearOpenAddressingHashtable linearTable2 = new LinearOpenAddressingHashtable(1000, 0.25);
-			for(int i=0; i < 1000; i++) {
+			for(int i=0; i < passes; i++) {
 				linearTable2.add(strings[i], i);
 			}
 
@@ -294,7 +296,7 @@ public class DataStructuresDriver {
 		
 		benchmark.start();
 		
-		for(int i=0; i < 1000; i++) {
+		for(int i=0; i < passes; i++) {
 			linearTable.get(strings[i]);
 		}
 		
@@ -307,8 +309,8 @@ public class DataStructuresDriver {
 		
 		countFound = 0;
 		countMissed = 0;
-		for(int i = 0; i < 1000; i++) {
-			String s = randS.generate(3);
+		for(int i = 0; i < passes; i++) {
+			String s = randS.generate(stringLength);
 			boolean tf = linearTable.contains(s);
 			if(tf == true) {
 				countFound++;
@@ -332,8 +334,8 @@ public class DataStructuresDriver {
 			accessList.add(s);
 		}
 		Collections.shuffle(accessList);
-		String[] randomOrder = new String[1000];
-		for(int i=0; i < 1000; i++) {
+		String[] randomOrder = new String[passes];
+		for(int i=0; i < passes; i++) {
 			randomOrder[i] = accessList.get(i);
 		}
 		
