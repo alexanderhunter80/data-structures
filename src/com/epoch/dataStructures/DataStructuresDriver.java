@@ -1,9 +1,13 @@
 package com.epoch.dataStructures;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 import com.epoch.dataStructures.controls.ControlArray;
 import com.epoch.dataStructures.controls.ControlSinglyLinkedList;
+import com.epoch.dataStructures.hashtables.LinearOpenAddressingHashtable;
+import com.epoch.dataStructures.hashtables.OAHashNode;
 
 public class DataStructuresDriver {
 
@@ -28,21 +32,26 @@ public class DataStructuresDriver {
 		
 		ArrayList<String> oneThousandStrings = new ArrayList();
 		RandomStringGenerator randS = new RandomStringGenerator();
+		Random rand = new Random();
 		
-		// setup, creates an ArrayList of one thousand random strings
 		
-		benchmark.start();
+		// setup, creates an ArrayList of one thousand random strings and an Array of one thousand ints 0-999
 		
+		int[] oneThousandInts = new int[1000];
 		for(int i = 0; i < 1000; i++) {
+			oneThousandInts[i] = i;
 			oneThousandStrings.add(randS.generate(3));
 		}
 		
-		benchmark.stop("oneThousandStrings generated");
+		System.out.println("oneThousandStrings generated");
 		System.out.println();
+		
 		
 		/*
 		 * Testing ControlArray
 		 */
+		
+		Benchmarker.printSeparator("ControlArray");
 		
 		// testing time for .add()
 		
@@ -54,8 +63,8 @@ public class DataStructuresDriver {
 		}
 		
 		benchmark.stop("ControlArray: .add()");
-		System.out.println(array.size());
-		System.out.println(array.get(999));
+		System.out.println("Size: "+ array.size());
+		System.out.println("Last element: " + array.get(999));
 		try {
 			System.out.println(array.get(1000));
 		} catch(ArrayIndexOutOfBoundsException e) {
@@ -75,12 +84,24 @@ public class DataStructuresDriver {
 			}
 			
 			benchmark.calculateSize();
+			System.out.println();
 			
 		} catch (Exception e) {
 			System.out.println("Failed during size test for ControlArray - stack trace follows");
 			e.printStackTrace();
 		}
 		
+		// testing time for .get()
+		
+		benchmark.start();
+		
+		for(int i : oneThousandInts) {
+			array.get(i);
+		}
+		
+		benchmark.stop("ControlArray: .get()");
+		System.out.println("One random get: "+array.get(rand.nextInt(1000)));
+		System.out.println();
 		
 		// testing time for .contains()
 		
@@ -105,9 +126,32 @@ public class DataStructuresDriver {
 		System.out.println(countMissed);
 		System.out.println();
 		
+		// testing time for .remove()
+		
+		benchmark.start();
+		
+		for (int i = 0; i < 1000; i++) {
+			int r = rand.nextInt(array.size());
+			array.remove(r);
+		}
+		
+		benchmark.stop("ControlArray: .remove()");
+		System.out.println("Reported size: " + array.size());
+		System.out.print("Double checking emptiness: ");
+		int count = 0;
+		for(Object o : array.getArray()) {
+			if(o != null) {
+				count++;
+			}
+		}
+		System.out.println(count);
+		System.out.println();
+		
 		/*
 		 * Testing ControlSinglyLinkedList 
 		 */
+		
+		Benchmarker.printSeparator("ControlSinglyLinkedList");
 		
 		// testing time for .add()
 		
@@ -119,14 +163,14 @@ public class DataStructuresDriver {
 		}
 		
 		benchmark.stop("ControlArray: .add()");
-		System.out.println(list.size());
-		System.out.println(list.get(999));
-		try {
-			System.out.println(list.get(1000));
-		} catch(IndexOutOfBoundsException e) {
-			System.out.println("Hit expected exception:");
-			System.out.println(e);
-		}
+//		System.out.println(list.size());
+//		System.out.println(list.get(999));
+//		try {
+//			System.out.println(list.get(1000));
+//		} catch(IndexOutOfBoundsException e) {
+//			System.out.println("Hit expected exception:");
+//			System.out.println(e);
+//		}
 		System.out.println();
 		
 		// testing size after .add()
@@ -140,11 +184,23 @@ public class DataStructuresDriver {
 			}
 			
 			benchmark.calculateSize();
+			System.out.println();
 			
 		} catch (Exception e) {
 			System.out.println("Failed during size test for ControlSinglyLinkedList - stack trace follows");
 			e.printStackTrace();
 		}
+		
+		// testing time for .get()
+		
+		benchmark.start();
+		
+		for(int i : oneThousandInts) {
+			list.get(i);
+		}
+		
+		benchmark.stop("ControlSinglyLinkedList: .get()");
+		System.out.println();
 		
 		// testing time for .contains()
 		
@@ -169,6 +225,137 @@ public class DataStructuresDriver {
 		System.out.println(countMissed);
 		System.out.println();
 		
+		// testing time for .remove()
+		
+		benchmark.start();
+		
+		for (int i = 0; i < 1000; i++) {
+			int r = rand.nextInt(list.size());
+			list.remove(r);
+		}
+		
+		benchmark.stop("ControlSinglyLinkedList: .remove()");
+		System.out.println("Reported size: " + list.size());
+		System.out.print("Double checking emptiness: ");
+		System.out.println(list.getHead());
+		System.out.println();
+		
+		/*
+		 * Testing LinearOpenAddressingHashtable
+		 */
+		
+		Benchmarker.printSeparator("LinearOpenAddressingHashtable");
+		
+		
+		// setting up vanilla array from oneThousandStrings, for minimum overhead
+		String[] strings = new String[1000];
+		for(int i = 0; i < 1000; i++) {
+			strings[i] = oneThousandStrings.get(i);
+		}
+		
+		// testing time for .add()
+		
+		benchmark.start();
+		
+		LinearOpenAddressingHashtable linearTable = new LinearOpenAddressingHashtable(1000, 0.25);
+		for(int i=0; i < 1000; i++) {
+			linearTable.add(strings[i], i);
+		}
+		
+		benchmark.stop("LinearOpenAddressingHashtable: .add()");
+		System.out.print("Size: ");
+		System.out.println(linearTable.getSize());
+		System.out.print("Load: ");
+		System.out.println(linearTable.getLoad());
+		System.out.print("Load factor: ");
+		double lf = (double) linearTable.getLoad()/linearTable.getSize();
+		System.out.println(lf);
+		System.out.println();
+		
+		// testing size after .add()
+		
+		try {
+			benchmark.initSize();
+			
+			LinearOpenAddressingHashtable linearTable2 = new LinearOpenAddressingHashtable(1000, 0.25);
+			for(int i=0; i < 1000; i++) {
+				linearTable2.add(strings[i], i);
+			}
+
+			benchmark.calculateSize();
+			System.out.println();
+			
+		} catch (Exception e) {
+			System.out.println("Failed during size test for LinearOpenAddressingTable - stack trace follows");
+			e.printStackTrace();
+		}
+		
+		// testing time for .get()
+		
+		benchmark.start();
+		
+		for(int i=0; i < 1000; i++) {
+			linearTable.get(strings[i]);
+		}
+		
+		benchmark.stop("LinearOpenAddressingHashtable: .get()");
+		System.out.println();
+		
+		// testing time for .contains()
+		
+		benchmark.start();
+		
+		countFound = 0;
+		countMissed = 0;
+		for(int i = 0; i < 1000; i++) {
+			String s = randS.generate(3);
+			boolean tf = linearTable.contains(s);
+			if(tf == true) {
+				countFound++;
+			} else {
+				countMissed++;
+			}
+		}
+
+		benchmark.stop("LinearOpenAddressingHashtable: .contains()");
+		System.out.print("Found: ");
+		System.out.println(countFound);
+		System.out.print("Missed: ");
+		System.out.println(countMissed);
+		System.out.println();
+		
+		// testing time for .remove()
+		
+		// set up to remove all previously used keys in random order
+		ArrayList<String> accessList = new ArrayList<String>();
+		for(String s : strings) {
+			accessList.add(s);
+		}
+		Collections.shuffle(accessList);
+		String[] randomOrder = new String[1000];
+		for(int i=0; i < 1000; i++) {
+			randomOrder[i] = accessList.get(i);
+		}
+		
+		benchmark.start();
+		
+		for(String s : randomOrder) {
+			linearTable.remove(s);
+		}
+		
+		benchmark.stop("LinearOpenAddressingHashtable: .remove()");
+		System.out.println("Reported size: " + linearTable.getLoad());
+		System.out.print("Double checking emptiness: ");
+		count = 0;
+		for(OAHashNode o : linearTable.getEntireTable()) {
+			if(o != null) {
+				if(o.key != null) {
+					count++;
+				}
+			}
+		}
+		System.out.println(count);
+		System.out.println();
 
 	}
 

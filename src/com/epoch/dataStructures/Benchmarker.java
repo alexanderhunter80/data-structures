@@ -27,10 +27,9 @@ public class Benchmarker {
 	public long stop(String s) {
 		stopTime = System.nanoTime();
 		elapsedTime = stopTime - startTime;
+		String millis = String.format("%.3f", (double) elapsedTime / 1000000);
 		System.out.println(s);
-		System.out.print("Operation completed in ");
-		System.out.print(elapsedTime);
-		System.out.println("ns");
+		System.out.println("Operation completed in " + Long.toString(elapsedTime) + "ns (" + millis + " ms)");
 		return elapsedTime;
 	}
 	
@@ -73,6 +72,12 @@ public class Benchmarker {
 		return _runtime.totalMemory() - _runtime.freeMemory();
 	}
 	
-	
+	public static void printSeparator(String s) {
+		String separator = new String(new char[80]).replace("\0", "*");
+		System.out.println(separator);
+		System.out.println(s);
+		System.out.println(separator);
+		System.out.println();
+	}
 
 }

@@ -2,18 +2,14 @@ package com.epoch.dataStructures;
 
 public interface Testable {
 	
-	void add(Object o);
+	public <T> T access(T t);
 	
-//	void remove(Object o);
+	public <T> T search(T t);
 	
-	boolean contains(Object o);
+	public <T> boolean contains(T t);
 	
-	// Object get(Object o);
+	public <T> void insert(T t);
 	
-	// Object find(Object o);
-	
-	// how to make method signatures match both Objects and primitives?
-	
-	
+	public <T> void remove(T t);
 
 }

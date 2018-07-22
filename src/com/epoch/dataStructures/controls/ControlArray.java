@@ -1,8 +1,6 @@
 package com.epoch.dataStructures.controls;
 
-import com.epoch.dataStructures.Testable;
-
-public class ControlArray implements Testable {
+public class ControlArray {
 	
 	// attributes
 	
@@ -29,8 +27,6 @@ public class ControlArray implements Testable {
 	public int size() {
 		return next;
 	}
-	
-	// other methods
 	
 	public void add(Object o) throws ArrayIndexOutOfBoundsException {
 		if(next > array.length || next < 0) {
@@ -59,7 +55,7 @@ public class ControlArray implements Testable {
 	
 	public void remove(int idx) {
 		int i;
-		for(i = idx; i < next; i++) {
+		for(i = idx; i < (next-1); i++) {
 			array[i] = array[i+1];
 		}
 		array[i] = null;

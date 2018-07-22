@@ -1,8 +1,6 @@
 package com.epoch.dataStructures.controls;
 
-import com.epoch.dataStructures.Testable;
-
-public class ControlSinglyLinkedList implements Testable {
+public class ControlSinglyLinkedList {
 
 	// attributes
 
@@ -114,6 +112,7 @@ public class ControlSinglyLinkedList implements Testable {
 			}
 			current.setNext(current.getNext().getNext());
 		}
+		size--;
 	}
 	
 	public boolean findAndRemove(Object o) {
