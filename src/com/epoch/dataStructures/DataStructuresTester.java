@@ -11,6 +11,7 @@ import com.epoch.dataStructures.hashtables.OAHashNode;
 import com.epoch.dataStructures.hashtables.PeriodicIncreasingAmplitudeOpenAddressingHashtable;
 import com.epoch.dataStructures.hashtables.QuadraticOpenAddressingHashtable;
 import com.epoch.dataStructures.lists.DoublyLinkedList;
+import com.epoch.dataStructures.trees.BinarySearchTree;
 
 public class DataStructuresTester {
 
@@ -784,6 +785,133 @@ public class DataStructuresTester {
 
 
 	}
+	
+	public void testBinarySearchTree() {
 
+		/*
+		 * Testing ControlSinglyLinkedList 
+		 */
+
+		Benchmarker.printSeparator("BinarySearchTree");
+
+		// testing time for .add()
+
+		// setting up vanilla array from testStrings, for minimum overhead
+		String[] strings = new String[passes];
+		for(int i = 0; i < passes; i++) {
+			strings[i] = testStrings.get(i);
+		}
+
+		// testing time for .add()
+
+		benchmark.start();
+
+		BinarySearchTree bst = new BinarySearchTree();
+		for(int i=0; i < passes; i++) {
+			bst.add(i, strings[i]);
+		}
+
+		benchmark.stop("BinarySearchTree: .add()");
+		System.out.print("Size: ");
+		System.out.println(bst.size());
+		System.out.println();
+		
+		
+		// testing size after .add()
+
+		try {
+			benchmark.initSize();
+
+			BinarySearchTree bst2 = new BinarySearchTree();
+			for(int i=0; i < passes; i++) {
+				bst2.add(i, strings[i]);
+			}
+
+			benchmark.calculateSize();
+			System.out.println();
+
+		} catch (Exception e) {
+			System.out.println("Failed during size test for BinarySearchTree - stack trace follows");
+			e.printStackTrace();
+		}
+		
+		// testing time for .get()
+
+		benchmark.start();
+
+		for(int i=0; i < passes; i++) {
+			bst.get(i);
+		}
+
+		benchmark.stop("BinarySearchTree: .get()");
+		System.out.println();
+		
+		// check that table behaves properly after being populated
+		System.out.println("Confirming proper operation of BinarySearchTree");
+		System.out.println("~~ THE NEXT TWO LINES SHOULD MATCH ~~");
+		String ts = null;
+		boolean flag = false;
+		while(flag != true) {
+			ts = randS.generate(stringLength);
+			if(!testStrings.contains(ts)) {
+				flag = true;
+			}
+		}
+		System.out.println(ts);
+		bst.add(10001, ts);
+		System.out.println(bst.get(passes+1));
+		bst.remove(passes+1);
+		System.out.println();
+		
+		// testing time for .contains()
+
+		benchmark.start();
+
+		int countFound = 0;
+		int countMissed = 0;
+		for(int i = 0; i < passes; i++) {
+			String s = randS.generate(stringLength);
+			boolean tf = bst.contains(s); // changed
+			if(tf == true) {
+				countFound++;
+			} else {
+				countMissed++;
+			}
+		}
+
+		benchmark.stop("BinarySearchTree: .contains()");
+		System.out.print("Found: ");
+		System.out.println(countFound);
+		System.out.print("Missed: ");
+		System.out.println(countMissed);
+		System.out.println();
+		
+		// testing time for .remove()
+
+		// set up to remove all previously used keys in random order
+		// set up to check all previously used keys in random order
+		ArrayList<Integer> accessList = new ArrayList<Integer>();
+		for(int k : testInts) {
+			accessList.add(k);
+		}
+		Collections.shuffle(accessList);
+		int[] randomOrder = new int[passes];
+		for(int i=0; i < passes; i++) {
+			randomOrder[i] = accessList.get(i);
+		}
+
+		benchmark.start();
+
+		for(int i : randomOrder) {
+			bst.remove(i);
+		}
+
+		benchmark.stop("BinarySearchTree: .remove()");
+		System.out.println("Reported size: " + bst.size());
+		System.out.print("Double checking emptiness: ");
+		System.out.println(bst.getHead());
+		System.out.println();
+		
+	}
 
 }

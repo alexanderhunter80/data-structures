@@ -1,26 +1,36 @@
 package com.epoch.dataStructures;
 
+import com.epoch.dataStructures.DataStructuresTester;
+
 public class DataStructuresDriver {
 
 	public static void main(String[] args) {
 		
-		DataStructuresTester tester = new DataStructuresTester(10000,4);
+		System.out.println("Starting run in DataStructuresDriver");
 		
-		// controls - Array and SLL
+		// so, uh, this doesn't work if the string length is less than 3...
+		// which OF COURSE is because there are only 36*36 = 1296 unique strings of length 2 :/ good job, brain!
+		DataStructuresTester tester = new DataStructuresTester(10000,3);
 		
+		
+//		// controls - Array and SLL
+//		
 		tester.testControlArray();
-		
 		tester.testControlSinglyLinkedList();
-		
-		// lists
-		
+//		
+//		// lists
+//		
 		tester.testDoublyLinkedList();
-		
-		// hashtables
-
+//		
+//		// hashtables
+//
 		tester.testLinearOpenAddressingHashtable();
 		tester.testQuadraticOpenAddressingHashtable();
 		tester.testPeriodicHashtable();
+		
+		// trees
+		
+		tester.testBinarySearchTree();
 		
 		// wrapup
 		
