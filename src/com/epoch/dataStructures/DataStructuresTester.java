@@ -10,6 +10,8 @@ import com.epoch.dataStructures.hashtables.LinearOpenAddressingHashtable;
 import com.epoch.dataStructures.hashtables.OAHashNode;
 import com.epoch.dataStructures.hashtables.PeriodicIncreasingAmplitudeOpenAddressingHashtable;
 import com.epoch.dataStructures.hashtables.QuadraticOpenAddressingHashtable;
+import com.epoch.dataStructures.heaps.MinHeap;
+import com.epoch.dataStructures.heaps.MinHeapNode;
 import com.epoch.dataStructures.lists.DoublyLinkedList;
 import com.epoch.dataStructures.trees.BinarySearchTree;
 
@@ -293,7 +295,7 @@ public class DataStructuresTester {
 			list.add(s);
 		}
 
-		benchmark.stop("ControlArray: .add()");
+		benchmark.stop("DoublyLinkedList: .add()");
 		//	System.out.println(list.size());
 		//	System.out.println(list.get(passes-1));
 		//	try {
@@ -858,7 +860,7 @@ public class DataStructuresTester {
 			}
 		}
 		System.out.println(ts);
-		bst.add(10001, ts);
+		bst.add(passes+1, ts);
 		System.out.println(bst.get(passes+1));
 		bst.remove(passes+1);
 		System.out.println();
@@ -889,7 +891,6 @@ public class DataStructuresTester {
 		// testing time for .remove()
 
 		// set up to remove all previously used keys in random order
-		// set up to check all previously used keys in random order
 		ArrayList<Integer> accessList = new ArrayList<Integer>();
 		for(int k : testInts) {
 			accessList.add(k);
@@ -910,6 +911,119 @@ public class DataStructuresTester {
 		System.out.println("Reported size: " + bst.size());
 		System.out.print("Double checking emptiness: ");
 		System.out.println(bst.getHead());
+		System.out.println();
+		
+	}
+	
+	public void testMinHeap() {
+
+		/*
+		 * Testing MinHeap 
+		 */
+
+		Benchmarker.printSeparator("MinHeap");
+		
+		// testing time for .add()
+
+		// setting up vanilla array from testStrings, for minimum overhead
+		String[] strings = new String[passes];
+		for(int i = 0; i < passes; i++) {
+			strings[i] = testStrings.get(i);
+		}
+		
+		// set up to add all strings with randomized priority
+		ArrayList<Integer> accessList = new ArrayList<Integer>();
+		for(int k : testInts) {
+			accessList.add(k);
+		}
+		Collections.shuffle(accessList);
+		int[] randomOrder = new int[passes];
+		for(int i=0; i < passes; i++) {
+			randomOrder[i] = accessList.get(i);
+		}
+
+		benchmark.start();
+
+		MinHeap minHeap = new MinHeap(passes);
+		for(int i=0; i < passes; i++) {
+			minHeap.add(randomOrder[i], strings[i]);
+		}
+
+		benchmark.stop("MinHeap: .add()");
+		System.out.print("Size: ");
+		System.out.println(minHeap.size());
+		System.out.println();
+		
+		// testing size after .add()
+		
+		try {
+			benchmark.initSize();
+
+			MinHeap mh2 = new MinHeap(passes);
+			for(int i=0; i < passes; i++) {
+				mh2.add(i, strings[i]);
+			}
+
+			benchmark.calculateSize();
+			System.out.println();
+
+		} catch (Exception e) {
+			System.out.println("Failed during size test for MinHeap - stack trace follows");
+			e.printStackTrace();
+		}
+		
+		// testing time for .get()
+
+		benchmark.start();
+
+		for(int i=0; i < passes; i++) {
+			minHeap.get(strings[i]);
+		}
+
+		benchmark.stop("MinHeap: .get()");
+		System.out.println();
+		
+		// testing time for .contains()
+
+		benchmark.start();
+
+		int countFound = 0;
+		int countMissed = 0;
+		for(int i = 0; i < passes; i++) {
+			String s = randS.generate(stringLength);
+			boolean tf = minHeap.contains(s); // changed
+			if(tf == true) {
+				countFound++;
+			} else {
+				countMissed++;
+			}
+		}
+
+		benchmark.stop("MinHeap: .contains()");
+		System.out.print("Found: ");
+		System.out.println(countFound);
+		System.out.print("Missed: ");
+		System.out.println(countMissed);
+		System.out.println();
+		
+		// testing time for .remove()
+
+		benchmark.start();
+
+		for(int i : testInts) {
+			minHeap.remove();
+		}
+
+		benchmark.stop("MinHeap: .remove()");
+		System.out.println("Reported size: " + minHeap.size());
+		System.out.print("Double checking emptiness: ");
+		int count = 0;
+		for(MinHeapNode node : minHeap.getArray()) {
+			if(node != null) {
+				count++;
+			}
+		}
+		System.out.println(count);
 		System.out.println();
 		
 	}

@@ -10,25 +10,29 @@ public class DataStructuresDriver {
 		
 		// so, uh, this doesn't work if the string length is less than 3...
 		// which OF COURSE is because there are only 36*36 = 1296 unique strings of length 2 :/ good job, brain!
-		DataStructuresTester tester = new DataStructuresTester(10000,3);
+		DataStructuresTester tester = new DataStructuresTester(10000,4);
 		
 		
-//		// controls - Array and SLL
+////		// controls - Array and SLL
+////		
+//		tester.testControlArray();
+//		tester.testControlSinglyLinkedList();
+////		
+////		// lists
+////		
+//		tester.testDoublyLinkedList();
+////		
+////		// hashtables
+////
+//		tester.testLinearOpenAddressingHashtable();
+//		tester.testQuadraticOpenAddressingHashtable();
+//		tester.testPeriodicHashtable();
 //		
-		tester.testControlArray();
-		tester.testControlSinglyLinkedList();
+//		// heaps
 //		
-//		// lists
+//		tester.testMinHeap();
 //		
-		tester.testDoublyLinkedList();
-//		
-//		// hashtables
-//
-		tester.testLinearOpenAddressingHashtable();
-		tester.testQuadraticOpenAddressingHashtable();
-		tester.testPeriodicHashtable();
-		
-		// trees
+//		// trees
 		
 		tester.testBinarySearchTree();
 		
