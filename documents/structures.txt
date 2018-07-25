@@ -1,30 +1,31 @@
 Controls:
-- Array			<< AH, mostly done
-- SLL 			<< AH, mostly done
+- Array				<< AH, done
+- SLL 				<< AH, done
 
 Arrays:
 - Circular Array
 
 Lists:
-- Doubly Linked List	<< AH, mostly done
+- Doubly Linked List		<< AH, done
 - Sentinel Cyclical Doubly Linked List (CL)
 - Linked List stored as an Array
 - Skip List
 
 Hashtables:
 - Chained (CL)
-- Open addressing	<< AH, mostly done
+- Open addressing		<< AH, done
 
 Hash Functions?
 
 Trees:
-- Simple binary search tree	<< AH, mostly done
+- Simple binary search tree	<< AH, done
+- AVL tree
 - Red-black tree (CL)
 - van Emde Boas tree (CL)
-- Splay tree		<< AH
+- Splay tree			<< AH
 
 Heaps:
-- Simple min heap
+- Simple min heap		<< AH, done
 - Binomial heap
 - Pairing heap
 - Fib Heap (CL)
