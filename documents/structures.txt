@@ -19,7 +19,7 @@ Hash Functions?
 
 Trees:
 - Simple binary search tree	<< AH, done
-- AVL tree
+- AVL tree			<< AH, done
 - Red-black tree (CL)
 - van Emde Boas tree (CL)
 - Splay tree			<< AH
@@ -34,7 +34,7 @@ Graphs:
 - Simple Graph?
 
 Tries:
-- Simple trie (radix tree)	<< AH
+- Simple trie (radix tree)	<< AH, done
 - X-fast trie
 
 Challenges

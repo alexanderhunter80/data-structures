@@ -8,7 +8,7 @@ public class DataStructuresDriver {
 		
 		System.out.println("Starting run in DataStructuresDriver");
 		
-		DataStructuresTester tester = new DataStructuresTester(10000,3);
+		DataStructuresTester tester = new DataStructuresTester(10000,5);
 		
 		
 		// controls - Array and SLL
@@ -32,11 +32,12 @@ public class DataStructuresDriver {
 		
 		// trees
 		
-//		tester.testBinarySearchTree();
+		tester.testBinarySearchTree();
+		tester.testAVLTree();
 		
 		// tries
 		
-		tester.testTrie();
+//		tester.testTrie();
 		
 		// wrapup
 		
