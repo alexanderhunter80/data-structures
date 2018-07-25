@@ -34,7 +34,7 @@ Graphs:
 - Simple Graph?
 
 Tries:
-- Simple trie (radix tree)
+- Simple trie (radix tree)	<< AH
 - X-fast trie
 
 Challenges

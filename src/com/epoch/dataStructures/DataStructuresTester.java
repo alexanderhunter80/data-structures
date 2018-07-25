@@ -14,6 +14,7 @@ import com.epoch.dataStructures.heaps.MinHeap;
 import com.epoch.dataStructures.heaps.MinHeapNode;
 import com.epoch.dataStructures.lists.DoublyLinkedList;
 import com.epoch.dataStructures.trees.BinarySearchTree;
+import com.epoch.dataStructures.tries.Trie;
 
 public class DataStructuresTester {
 
@@ -1024,6 +1025,119 @@ public class DataStructuresTester {
 			}
 		}
 		System.out.println(count);
+		System.out.println();
+		
+	}
+	
+	public void testTrie() {
+		
+		/*
+		 * Testing Trie
+		 */
+
+		Benchmarker.printSeparator("Trie");
+		
+		// testing time for .add()
+
+		// setting up vanilla array from testStrings, for minimum overhead
+		String[] strings = new String[passes];
+		for(int i = 0; i < passes; i++) {
+			strings[i] = testStrings.get(i);
+		}
+		
+		benchmark.start();
+
+		Trie trie = new Trie();
+		for(int i=0; i < passes; i++) {
+			trie.add(strings[i]);
+		}
+
+		benchmark.stop("Trie: .add()");
+		System.out.print("Size: ");
+		System.out.println(trie.size());
+		System.out.println();
+		
+		// testing size after .add()
+		
+		try {
+			benchmark.initSize();
+
+			Trie trie2 = new Trie();
+			for(int i=0; i < passes; i++) {
+				trie2.add(strings[i]);
+			}
+
+			benchmark.calculateSize();
+			System.out.println();
+
+		} catch (Exception e) {
+			System.out.println("Failed during size test for Trie - stack trace follows");
+			e.printStackTrace();
+		}
+		
+		// testing time for .get()
+		
+		benchmark.start();
+
+		for(int i=0; i < passes; i++) {
+			trie.get(strings[i]);
+		}
+
+		benchmark.stop("Trie: .get()");
+		System.out.println();
+		
+		System.out.println("Confirming proper operation of Trie");
+		System.out.println("~~ THE NEXT TWO LINES SHOULD MATCH ~~");
+		String ts = null;
+		boolean flag = false;
+		while(flag != true) {
+			ts = randS.generate(stringLength);
+			if(!testStrings.contains(ts)) {
+				flag = true;
+			}
+		}
+		System.out.println(ts);
+		trie.add(ts);
+		System.out.println(trie.get(ts));
+		trie.remove(ts);
+		System.out.println();
+		
+		// testing time for .contains()
+
+		benchmark.start();
+
+		int countFound = 0;
+		int countMissed = 0;
+		for(int i = 0; i < passes; i++) {
+			String s = randS.generate(stringLength);
+			boolean tf = trie.contains(s); // changed
+			if(tf == true) {
+				countFound++;
+			} else {
+				countMissed++;
+			}
+		}
+		
+		benchmark.stop("Trie: .contains()");
+		System.out.print("Found: ");
+		System.out.println(countFound);
+		System.out.print("Missed: ");
+		System.out.println(countMissed);
+		System.out.println();
+		
+		// testing time for .remove()
+
+		benchmark.start();
+
+		for(int i=0; i < passes; i++) {
+			trie.remove(strings[i]);
+		}
+
+		benchmark.stop("Trie: .remove()");
+		System.out.println("Reported size: " + trie.size());
+		System.out.println("Double checking emptiness (should be 1, false): ");
+		System.out.println(trie.getHead().countNodes());
+		System.out.println(trie.getHead().hasValidChildren());
 		System.out.println();
 		
 	}
