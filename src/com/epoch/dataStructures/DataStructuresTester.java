@@ -6,6 +6,8 @@ import java.util.Random;
 
 import com.epoch.dataStructures.controls.ControlArray;
 import com.epoch.dataStructures.controls.ControlSinglyLinkedList;
+import com.epoch.dataStructures.hashtables.CHashNode;
+import com.epoch.dataStructures.hashtables.ChainingHashtable;
 import com.epoch.dataStructures.hashtables.LinearOpenAddressingHashtable;
 import com.epoch.dataStructures.hashtables.OAHashNode;
 import com.epoch.dataStructures.hashtables.PeriodicIncreasingAmplitudeOpenAddressingHashtable;
@@ -375,6 +377,163 @@ public class DataStructuresTester {
 		System.out.println(list.getHead());
 		System.out.println();
 	}
+	
+	public void testChainingHashtable() {
+
+		/*
+		 * Testing ChainingHashtable
+		 */
+
+		Benchmarker.printSeparator("ChainingHashtable");
+
+
+		// setting up vanilla array from oneThousandStrings, for minimum overhead
+		String[] strings = new String[passes];
+		for(int i = 0; i < passes; i++) {
+			strings[i] = testStrings.get(i);
+		}
+
+		// testing time for .add()
+
+		benchmark.start();
+
+		ChainingHashtable chainTable = new ChainingHashtable(passes, 3);
+		for(int i=0; i < passes; i++) {
+			chainTable.add(strings[i], i);
+		}
+
+		benchmark.stop("ChainingHashtable: .add()");
+		System.out.print("Size: ");
+		System.out.println(chainTable.getSize());
+		System.out.print("Load: ");
+		System.out.println(chainTable.getLoad());
+		System.out.print("Load factor: ");
+		double lf = (double) chainTable.getLoad()/chainTable.getSize();
+		System.out.println(lf);
+		System.out.println("Chains: "+chainTable.chains);
+		System.out.println();
+
+		// testing size after .add()
+
+		try {
+			benchmark.initSize();
+
+			ChainingHashtable chainTable2 = new ChainingHashtable(passes, 3);
+			for(int i=0; i < passes; i++) {
+				chainTable2.add(strings[i], i);
+			}
+
+			benchmark.calculateSize();
+			System.out.println();
+
+		} catch (Exception e) {
+			System.out.println("Failed during size test for ChainingHashtable - stack trace follows");
+			e.printStackTrace();
+		}
+		
+		// check that table behaves properly after being populated
+		System.out.println("Confirming proper operation of ChainingHashtable");
+		String t = "~~ THESE TWO LINES SHOULD MATCH ~~";
+		String ts = null;
+		boolean flag = false;
+		while(flag != true) {
+			ts = randS.generate(stringLength);
+			if(!testStrings.contains(ts)) {
+				flag = true;
+			}
+		}
+		System.out.println(t);
+		chainTable.add(ts, t);
+		System.out.println(chainTable.get(ts));
+		chainTable.remove(ts);
+		System.out.println();
+
+		// testing time for .get()
+
+		benchmark.start();
+
+		for(int i=0; i < passes; i++) {
+			chainTable.get(strings[i]);
+		}
+
+		benchmark.stop("ChainingHashtable: .get()");
+		System.out.println();
+
+		// testing time for .contains()
+
+		benchmark.start();
+
+		int countFound = 0;
+		int countMissed = 0;
+		for(int i = 0; i < passes; i++) {
+			String s = randS.generate(stringLength);
+			boolean tf = chainTable.contains(s);
+			if(tf == true) {
+				countFound++;
+			} else {
+				countMissed++;
+			}
+		}
+
+		benchmark.stop("ChainingHashtable: .contains()");
+		System.out.print("Found: ");
+		System.out.println(countFound);
+		System.out.print("Missed: ");
+		System.out.println(countMissed);
+		System.out.println();
+
+		// testing time for .remove()
+
+		// set up to remove all previously used keys in random order
+		ArrayList<String> accessList = new ArrayList<String>();
+		for(String s : strings) {
+			accessList.add(s);
+		}
+		Collections.shuffle(accessList);
+		String[] randomOrder = new String[passes];
+		for(int i=0; i < passes; i++) {
+			randomOrder[i] = accessList.get(i);
+		}
+
+		benchmark.start();
+
+		for(String s : randomOrder) {
+			chainTable.remove(s);
+		}
+
+		benchmark.stop("ChainingHashtable: .remove()");
+		System.out.println("Reported size: " + chainTable.getLoad());
+		System.out.print("Double checking emptiness: ");
+		int count = 0;
+		for(CHashNode o : chainTable.getEntireTable()) {
+			if(o != null) {
+				if(o.key != null) {
+					count++;
+				}
+			}
+		}
+		System.out.println(count);
+		System.out.println();
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public void testLinearOpenAddressingHashtable() {
 

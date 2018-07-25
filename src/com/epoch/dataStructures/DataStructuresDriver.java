@@ -8,7 +8,7 @@ public class DataStructuresDriver {
 		
 		System.out.println("Starting run in DataStructuresDriver");
 		
-		DataStructuresTester tester = new DataStructuresTester(10000,5);
+		DataStructuresTester tester = new DataStructuresTester(10000,3);
 		
 		
 		// controls - Array and SLL
@@ -22,6 +22,7 @@ public class DataStructuresDriver {
 		
 		// hashtables
 
+		tester.testChainingHashtable();
 //		tester.testLinearOpenAddressingHashtable();
 //		tester.testQuadraticOpenAddressingHashtable();
 //		tester.testPeriodicHashtable();
@@ -32,8 +33,8 @@ public class DataStructuresDriver {
 		
 		// trees
 		
-		tester.testBinarySearchTree();
-		tester.testAVLTree();
+//		tester.testBinarySearchTree();
+//		tester.testAVLTree();
 		
 		// tries
 		

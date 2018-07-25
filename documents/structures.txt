@@ -12,7 +12,7 @@ Lists:
 - Skip List
 
 Hashtables:
-- Chained (CL)
+- Chained			<< AH, done
 - Open addressing		<< AH, done
 
 Hash Functions?
@@ -22,7 +22,7 @@ Trees:
 - AVL tree			<< AH, done
 - Red-black tree (CL)
 - van Emde Boas tree (CL)
-- Splay tree			<< AH
+- Splay tree			<< AH maybe?
 
 Heaps:
 - Simple min heap		<< AH, done
