@@ -1,7 +1,6 @@
 package com.epoch.dataStructures;
 
-import com.epoch.dataStructures.DataStructuresTester;
-import com.epoch.dataStructures.heaps.*;
+import com.epoch.dataStructures.trees.RedBlackTreeTester;
 
 public class DataStructuresDriver {
 
@@ -9,7 +8,7 @@ public class DataStructuresDriver {
 		
 		System.out.println("Starting run in DataStructuresDriver");
 		
-		DataStructuresTester tester = new DataStructuresTester(10000,3);
+//		DataStructuresTester tester = new DataStructuresTester(10000,3);
 		
 		
 		// controls - Array and SLL
@@ -23,7 +22,7 @@ public class DataStructuresDriver {
 		
 		// hashtables
 
-		tester.testChainingHashtable();
+//		tester.testChainingHashtable();
 //		tester.testLinearOpenAddressingHashtable();
 //		tester.testQuadraticOpenAddressingHashtable();
 //		tester.testPeriodicHashtable();
@@ -35,13 +34,17 @@ public class DataStructuresDriver {
 		// trees
 		
 		//tester.testBinarySearchTree();
-		tester.test_proto_vanEmdeBoas();
-		tester.testTrie();
-		tester.testAVLTree();
+//		tester.test_proto_vanEmdeBoas();
+//		tester.testTrie();
+//		tester.testAVLTree();
 		
 		// wrapup
 		
-		tester.wrapup();
+//		tester.wrapup();
+		
+		RedBlackTreeTester rbtest = new RedBlackTreeTester(10000,3);
+		
+		rbtest.testRedBlackTree();
 
 
 	}
