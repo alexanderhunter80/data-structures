@@ -9,32 +9,35 @@ public class DataStructuresDriver {
 		
 		System.out.println("Starting run in DataStructuresDriver");
 		
-		DataStructuresTester tester = new DataStructuresTester(10000,4);
+		DataStructuresTester tester = new DataStructuresTester(10000,3);
 		
 		
 		// controls - Array and SLL
 		
-		tester.testControlArray();
-		tester.testControlSinglyLinkedList();
+//		tester.testControlArray();
+//		tester.testControlSinglyLinkedList();
 		
 		// lists
 	
-		tester.testDoublyLinkedList();
+//		tester.testDoublyLinkedList();
 		
 		// hashtables
 
-		tester.testLinearOpenAddressingHashtable();
-		tester.testQuadraticOpenAddressingHashtable();
-		tester.testPeriodicHashtable();
+		tester.testChainingHashtable();
+//		tester.testLinearOpenAddressingHashtable();
+//		tester.testQuadraticOpenAddressingHashtable();
+//		tester.testPeriodicHashtable();
 		
 		// heaps
 		
-		tester.testMinHeap();
+//		tester.testMinHeap();
 		
 		// trees
 		
 		//tester.testBinarySearchTree();
 		tester.test_proto_vanEmdeBoas();
+		tester.testTrie();
+		tester.testAVLTree();
 		
 		// wrapup
 		

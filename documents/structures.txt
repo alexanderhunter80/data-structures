@@ -12,17 +12,18 @@ Lists:
 - Skip List
 
 Hashtables:
-- Chained (CL)
+- Chained			<< AH, done
 - Open addressing		<< AH, done
 
 Hash Functions?
 
 Trees:
 - Simple binary search tree	<< AH, done
-- AVL tree
+- AVL tree			<< AH, done
 - Red-black tree (CL)
+- proto van Emde Boas Tree (CL, Done)
 - van Emde Boas tree (CL)
-- Splay tree			<< AH
+- Splay tree			<< AH maybe?
 
 Heaps:
 - Simple min heap		<< AH, done
@@ -34,7 +35,7 @@ Graphs:
 - Simple Graph?
 
 Tries:
-- Simple trie (radix tree)
+- Simple trie (radix tree)	<< AH, done
 - X-fast trie
 
 Challenges
