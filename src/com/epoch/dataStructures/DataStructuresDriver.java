@@ -1,6 +1,7 @@
 package com.epoch.dataStructures;
 
 import com.epoch.dataStructures.DataStructuresTester;
+import com.epoch.dataStructures.heaps.*;
 
 public class DataStructuresDriver {
 
@@ -32,12 +33,12 @@ public class DataStructuresDriver {
 		
 		// trees
 		
-		tester.testBinarySearchTree();
+		//tester.testBinarySearchTree();
+		tester.test_proto_vanEmdeBoas();
 		
 		// wrapup
 		
 		tester.wrapup();
-		
 
 
 	}
