@@ -1,50 +1,47 @@
 package com.epoch.dataStructures;
 
-import com.epoch.dataStructures.trees.RedBlackTreeTester;
-
 public class DataStructuresDriver {
 
 	public static void main(String[] args) {
 		
 		System.out.println("Starting run in DataStructuresDriver");
 		
-//		DataStructuresTester tester = new DataStructuresTester(10000,3);
+		DataStructuresTester tester = new DataStructuresTester(20000,3);
 		
 		
 		// controls - Array and SLL
 		
-//		tester.testControlArray();
-//		tester.testControlSinglyLinkedList();
+		tester.testControlArray();
+		tester.testControlSinglyLinkedList();
 		
 		// lists
 	
-//		tester.testDoublyLinkedList();
+		tester.testDoublyLinkedList();
 		
 		// hashtables
 
-//		tester.testChainingHashtable();
-//		tester.testLinearOpenAddressingHashtable();
-//		tester.testQuadraticOpenAddressingHashtable();
-//		tester.testPeriodicHashtable();
+		tester.testChainingHashtable();
+		tester.testLinearOpenAddressingHashtable();
+		tester.testQuadraticOpenAddressingHashtable();
+		tester.testPeriodicHashtable();
 		
 		// heaps
 		
-//		tester.testMinHeap();
+		tester.testMinHeap();
+		// tester.testFibHeap();
 		
 		// trees
 		
-		//tester.testBinarySearchTree();
-//		tester.test_proto_vanEmdeBoas();
-//		tester.testTrie();
-//		tester.testAVLTree();
+		tester.testBinarySearchTree();
+		tester.testTrie();
+		tester.testAVLTree();
+		tester.testRedBlackTree();
+		tester.test_proto_vanEmdeBoas();
 		
 		// wrapup
 		
-//		tester.wrapup();
+		tester.wrapup();
 		
-		RedBlackTreeTester rbtest = new RedBlackTreeTester(10000,3);
-		
-		rbtest.testRedBlackTree();
 
 
 	}
