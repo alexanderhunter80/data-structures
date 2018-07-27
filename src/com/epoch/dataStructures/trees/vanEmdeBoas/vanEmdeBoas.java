@@ -113,8 +113,7 @@ public class vanEmdeBoas {
 	
 	public void remove(int x) {
 		if (min == max) {
-			min = NIL;
-			max = NIL;
+			min = max = NIL;
 		} else if (U == 2) {
 			if (x == 0)
 				min = 1;

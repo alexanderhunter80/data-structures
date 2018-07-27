@@ -1,5 +1,7 @@
 package com.epoch.dataStructures.heaps;
 
+import java.util.ArrayList;
+
 public class FibonacciHeap<T> {
 	public FibNodeList<T> root;
 	private FibHeapNode<T> min;
@@ -44,6 +46,27 @@ public class FibonacciHeap<T> {
 		merged_heap.size = size + other.size;
 		
 		return merged_heap;
+	}
+	
+	public boolean contains(int key) {
+		return containsList(root, key);
+	}
+	
+	private boolean containsList(FibNodeList<T> list, int key) {
+		ArrayList<Boolean> c = new ArrayList<>();
+		list.iterate(x -> {
+			if (x.key == key) {
+				c.add(true);
+				return;
+			}
+			if (!x.children.isEmpty()) {
+				if (containsList(x.children, key)) {
+					c.add(true);
+					return;
+				}
+			}
+		});
+		return c.size() == 1;
 	}
 	
 	public FibHeapNode<T> getNode() {

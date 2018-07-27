@@ -19,6 +19,7 @@ import com.epoch.dataStructures.trees.AVLTree;
 import com.epoch.dataStructures.trees.BinarySearchTree;
 import com.epoch.dataStructures.trees.RedBlackTree;
 import com.epoch.dataStructures.trees.vanEmdeBoas.proto_vanEmdeBoas;
+import com.epoch.dataStructures.trees.vanEmdeBoas.vanEmdeBoas;
 import com.epoch.dataStructures.tries.Trie;
 
 public class DataStructuresTester {
@@ -72,7 +73,6 @@ public class DataStructuresTester {
 				count++;
 				i--;
 			}
-
 		}
 
 		System.out.println("DataStructuresTester initialized: " + passes + " passes of " + stringLength + "-character strings");
@@ -1467,93 +1467,37 @@ public class DataStructuresTester {
 		
 		// testing time for .add()
 
-		// setting up vanilla array from testStrings, for minimum overhead
+		benchmark.start();
+		
+		proto_vanEmdeBoas vEB = new proto_vanEmdeBoas((int)Math.pow(2, 16));
+		
+		benchmark.stop("proto van Emde Boas Structure: .init()");
+		
 		String[] strings = new String[passes];
 		for(int i = 0; i < passes; i++) {
 			strings[i] = testStrings.get(i);
 		}
-
-		// testing time for .add()
-
-		benchmark.start();
-
-		int size = 4;
-		int actual_size = (int)Math.pow(2, Math.pow(2, size));
-		proto_vanEmdeBoas p_vEB = new proto_vanEmdeBoas(actual_size);
-		
-		benchmark.stop("proto van Emde Boas: init()");
 		
 		benchmark.start();
 		
-		for(int i = 0; i < passes; i++) {
-			p_vEB.insert((int)(Math.random() * actual_size));
-		}
+		for (int i = 0; i < passes; i++)
+			vEB.insert(i);
 		
-		benchmark.stop("proto van Emde Boas: insert()");
-		System.out.print("Size: ");
-		System.out.println(actual_size);
-		System.out.println();
+		benchmark.stop("proto van Emde Boas Structure: .insert()");
 		
-		// testing size after .add()
-
-		try {
-			benchmark.initSize();
-
-			proto_vanEmdeBoas p_vEB_2 = new proto_vanEmdeBoas(actual_size);
-			for(int i = 0; i < passes; i++) {
-				p_vEB_2.insert((int)(Math.random() * actual_size));
-			}
-			
-			benchmark.calculateSize();
-			System.out.println();
-
-		} catch (Exception e) {
-			System.out.println("Failed during size test for proto van Emde Boas - stack trace follows");
-			e.printStackTrace();
-		}
-		
-//		benchmark.start();
-//
-//		int countFound = 0;
-//		int countMissed = 0;
-//		for(int i = 0; i < passes; i++) {
-//			String s = randS.generate(stringLength);
-//			boolean tf = p_vEB.contains(s); // changed
-//			if(tf == true) {
-//				countFound++;
-//			} else {
-//				countMissed++;
-//			}
-//		}
-//
-//		benchmark.stop("BinarySearchTree: .contains()");
-//		System.out.print("Found: ");
-//		System.out.println(countFound);
-//		System.out.print("Missed: ");
-//		System.out.println(countMissed);
-//		System.out.println();
-//		
-		// testing time for .remove()
-
-		// set up to remove all previously used keys in random order
-		ArrayList<Integer> accessList = new ArrayList<Integer>();
-		for(int k : testInts) {
-			accessList.add(k);
-		}
-		Collections.shuffle(accessList);
-		int[] randomOrder = new int[passes];
-		for(int i=0; i < passes; i++) {
-			randomOrder[i] = accessList.get(i);
-		}
-
 		benchmark.start();
-
-		for(int i : randomOrder) {
-			p_vEB.remove(i);
-		}
-
-		benchmark.stop("proto van Emde Boas: .remove()");
-		System.out.println();
+		
+		for (int i = 0; i < passes; i++)
+			vEB.insert(i);
+		
+		benchmark.stop("proto van Emde Boas Structure: .contains()");
+		
+		benchmark.start();
+		
+		for (int i = 0; i < passes; i++)
+			vEB.remove(i);
+		
+		benchmark.stop("proto van Emde Boas Structure: .remove()");
 		
 		
 	}
