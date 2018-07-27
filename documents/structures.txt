@@ -22,14 +22,14 @@ Trees:
 - AVL tree			<< AH, done
 - Red-black tree (CL)
 - proto van Emde Boas Tree (CL, Done)
-- van Emde Boas tree (CL)
+- van Emde Boas tree (CL, Done)
 - Splay tree			<< AH maybe?
 
 Heaps:
 - Simple min heap		<< AH, done
 - Binomial heap
 - Pairing heap
-- Fib Heap (CL)
+- Fib Heap (CL, Done)
 
 Graphs:
 - Simple Graph?

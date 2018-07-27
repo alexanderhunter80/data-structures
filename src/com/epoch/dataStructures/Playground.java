@@ -1,6 +1,6 @@
 package com.epoch.dataStructures;
 
-import com.epoch.dataStructures.trees.vanEmdeBoas.vanEmdeBoas;
+import com.epoch.dataStructures.heaps.*;
 
 public class Playground {
 	
@@ -8,46 +8,80 @@ public class Playground {
 		
 		Benchmarker benchmarker = new Benchmarker();
 		
-		int size = 10;
-		int actual_size = (int)Math.pow(2, size);
+		FibonacciHeap<String> heap = new FibonacciHeap<>();
 		
-		benchmarker.start();
+		FibHeapNode<String> y = new FibHeapNode<String>(10, "f");
+		heap.insert(y);
+		heap.insert(15, "e");
+		heap.insert(1, "g");
+		heap.insert(3, "gf");
+		heap.insert(5, "gd");
+		heap.insert(15, "f");
 		
-		vanEmdeBoas vEB = new vanEmdeBoas(actual_size);
+		print(heap);
 		
-		benchmarker.stop("Init");
+		heap.decrease(y, -1);
 		
-		benchmarker.start();
+		print(heap);
 		
-		vEB.insert(4);
 		
-		benchmarker.stop("Add");
 		
-		print(vEB);
+//		FibHeapNode<String> x;
+//		while ((x = heap.getNode()) != null) {
+//			System.out.println(x.key);
+////			print(heap);
+//		}
+//		
+//		print(heap);
+//		
+//		System.out.println("Min: " + heap.extract_min().key);
+//		System.out.println();
+//		
+//		heap.root.iterate(x -> {
+//			System.out.println(x.key);
+//		});
+////		
+//		System.out.println("Min: " + heap.extract_min().key);
+//		System.out.println();
+//		
+//		heap.root.iterate(x -> {
+//			System.out.println(x.key);
+//		});
+//		
+//		System.out.println("Min: " + heap.extract_min().key);
+//		System.out.println();
+//		
+//		heap.root.iterate(x -> {
+//			System.out.println(x.key);
+//		});
 		
-		System.out.println(vEB.contains(9));
-		
-		System.out.println(vEB.getMinimum());
-		System.out.println(vEB.getMaximum());
-		
-		vEB.insert(9);
-		vEB.insert(40);
-		vEB.insert(999);
-		
-		print(vEB);
-		
-		System.out.println(vEB.contains(9));
-		
+		//print(heap);
 		
 	}
 	
-	public static void print(vanEmdeBoas vEB) {
-		int x = vEB.getMinimum();
-		while (x != vanEmdeBoas.NIL) {
-			System.out.println(x);
-			x = vEB.getSuccessor(x);
-		}
+	public static <T> void print(FibonacciHeap<T> heap) {
+		System.out.println("Heap: {");
+		heap.root.iterate(x -> {
+			System.out.println(" " + x.key);
+			if (!x.children.isEmpty()) {
+				printList(x.children, 2);
+				System.out.println();
+			}
+		});
+		System.out.println("}");
 		System.out.println();
+	}
+	
+	public static <T> void printList(FibNodeList<T> list, int depth) {
+		String d = "";
+		for (int i = 0; i < depth; i++)
+			d += " ";
+		final String m = d;
+		list.iterate(y -> {
+			System.out.println(m + y.key);
+			if (!y.children.isEmpty())
+				printList(y.children, depth + 1);
+		});
 	}
 	
 }

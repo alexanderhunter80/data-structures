@@ -1,0 +1,16 @@
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\Benchmarker.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\DataStructuresDriver.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\DataStructuresTester.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\RandomStringGenerator.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\controls\ControlArray.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\controls\ControlSinglyLinkedList.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\controls\ControlSLNode.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\hashtables\Hasher.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\hashtables\LinearOpenAddressingHashtable.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\hashtables\OAHashNode.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\hashtables\PeriodicIncreasingAmplitudeOpenAddressingHashtable.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\hashtables\QuadraticOpenAddressingHashtable.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\lists\DLNode.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\lists\DoublyLinkedList.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\trees\BinarySearchTree.java
+C:\Users\alexa\Desktop\DojoAssignments\Projects\dataStructures\src\com\epoch\dataStructures\trees\BSTNode.java
