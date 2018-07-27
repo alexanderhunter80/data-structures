@@ -6,7 +6,7 @@ public class DataStructuresDriver {
 		
 		System.out.println("Starting run in DataStructuresDriver");
 		
-		DataStructuresTester tester = new DataStructuresTester(20000,3);
+		DataStructuresTester tester = new DataStructuresTester(10000,9);
 		
 		
 		// controls - Array and SLL
