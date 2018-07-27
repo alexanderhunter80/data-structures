@@ -14,13 +14,16 @@ public class vanEmdeBoasTester extends Tester {
 
 	public void run() {
 		Benchmarker benchmarker = new Benchmarker();
+		vanEmdeBoas vEB = null;
 		
 		Benchmarker.printSeparator("van Emde Boas tree");
 		System.out.println();
+		try {
+		benchmarker.initSize();
 		
 		benchmarker.start();
 		
-		vanEmdeBoas vEB = new vanEmdeBoas((int)Math.pow(2, 14));
+		vEB = new vanEmdeBoas((int)Math.pow(2, 16));
 		
 		benchmarker.stop("van Emde Boas tree: .init()");
 		
@@ -29,12 +32,15 @@ public class vanEmdeBoasTester extends Tester {
 			strings[i] = testStrings.get(i);
 		}
 		
+
 		benchmarker.start();
 		
 		for (int i = 0; i < passes; i++)
 			vEB.insert(i);
 		
 		benchmarker.stop("van Emde Boas tree: .insert()");
+		benchmarker.calculateSize();
+		} catch (Exception e) {}
 		
 		benchmarker.start();
 		

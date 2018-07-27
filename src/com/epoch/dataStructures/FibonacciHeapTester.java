@@ -28,6 +28,8 @@ public class FibonacciHeapTester extends Tester {
 		for(int i = 0; i < passes; i++) {
 			strings[i] = testStrings.get(i);
 		}
+		try {
+		benchmarker.initSize();
 		
 		benchmarker.start();
 		
@@ -35,6 +37,8 @@ public class FibonacciHeapTester extends Tester {
 			heap.insert(i, strings[i]);
 		
 		benchmarker.stop("Fibonacci Heap: .insert()");
+		benchmarker.calculateSize();
+		} catch (Exception e) {};
 		
 		benchmarker.start();
 		

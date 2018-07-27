@@ -1466,17 +1466,24 @@ public class DataStructuresTester {
 		Benchmarker.printSeparator("proto van Emde Boas Structure");
 		
 		// testing time for .add()
-
+		proto_vanEmdeBoas vEB = null;
+		
+		try {
+			benchmark.initSize();
+		
 		benchmark.start();
 		
-		proto_vanEmdeBoas vEB = new proto_vanEmdeBoas((int)Math.pow(2, 16));
+		vEB = new proto_vanEmdeBoas((int)Math.pow(2, 16));
 		
 		benchmark.stop("proto van Emde Boas Structure: .init()");
+		
+		
 		
 		String[] strings = new String[passes];
 		for(int i = 0; i < passes; i++) {
 			strings[i] = testStrings.get(i);
 		}
+		
 		
 		benchmark.start();
 		
@@ -1484,6 +1491,8 @@ public class DataStructuresTester {
 			vEB.insert(i);
 		
 		benchmark.stop("proto van Emde Boas Structure: .insert()");
+		benchmark.calculateSize();
+		} catch (Exception e) {}
 		
 		benchmark.start();
 		
